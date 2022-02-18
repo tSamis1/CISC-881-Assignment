@@ -86,24 +86,19 @@ def convert_to_range_0_1(image_data):
 
 def contrast_matching(nodule_2d, lung_photo):
     """
-     Contrast matching according to Litjens et al.
-     With some additional clip to prevent negative values or 0.
-      nodule_2d: intensities of the nodule
-      lung_photo: intensities of this particular lung area
-     returns c, but is clipped to 0.4 since low values made the nodules neigh
-     invisible sometimes.
+    This is the code that was changed for the assignment
     """
     # mean from only nodule pixels
     indexes = nodule_2d != np.min(nodule_2d)
     it = np.mean(nodule_2d[indexes].flatten())
 
     # mean of the surrounding lung tissue
-    ib = np.mean(lung_photo.flatten())
+    ib = np.max(lung_photo.flatten())
 
     # determine contrast
     c = np.log(it/ib)
 
-    return max(0.4, c)
+    return c
 
 
 def poisson_blend(nodule, lung_photo, x0, x1, y0, y1):
