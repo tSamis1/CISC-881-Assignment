@@ -86,14 +86,14 @@ def convert_to_range_0_1(image_data):
 
 def contrast_matching(nodule_2d, lung_photo):
     """
-    This is the code that was changed for the assignment
+     mean value changed to median, and minimum contrast value removed
     """
-    # mean from only nodule pixels
+    # median from only nodule pixels
     indexes = nodule_2d != np.min(nodule_2d)
-    it = np.mean(nodule_2d[indexes].flatten())
+    it = np.median(nodule_2d[indexes].flatten())
 
-    # mean of the surrounding lung tissue
-    ib = np.max(lung_photo.flatten())
+    # median of the surrounding lung tissue
+    ib = np.median(lung_photo.flatten())
 
     # determine contrast
     c = np.log(it/ib)
