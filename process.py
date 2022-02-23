@@ -79,6 +79,28 @@ class Nodulegeneration(SegmentationAlgorithm):
                 new_arr = convert_to_range_0_1(X_ct_2d_resampled)
 
                 # contrast matching:
+                
+                # This code attempts to create smaller to calculate node mean (does not work)
+                '''
+                c1 = contrast_matching(new_arr, cxr_img_scaled[x_min:(x_max//2), y_min:(y_max//2)])
+                c2 = contrast_matching(new_arr, cxr_img_scaled[(x_max//2+1):x_max, (y_max//2+1):y_max])
+                c3 = contrast_matching(new_arr, cxr_img_scaled[(x_max//2+1):x_max, y_min:(y_max//2)])
+                c4 = contrast_matching(new_arr, cxr_img_scaled[x_min:(x_max//2), (y_max//2+1):y_max])
+
+                nodule_contrasted = new_arr
+                for a in range(len(nodule_contrasted)):
+                    for b in range(len(nodule_contrasted[0])):
+                        if a <=  len(nodule_contrasted)/2:
+                            if b <=len(nodule_contrasted[0])/2:
+                                nodule_contrasted[a,b] = new_arr[a,b] * c1
+                            else:
+                                nodule_contrasted[a,b] = new_arr[a,b] * c4
+                        else:
+                            if b <= len(nodule_contrasted[0])/2:
+                                nodule_contrasted[a,b] = new_arr[a,b] * c3
+                            else:
+                                nodule_contrasted[a,b] = new_arr[a,b] * c2
+                '''
                 c = contrast_matching(new_arr, cxr_img_scaled[x_min:x_max, y_min:y_max])
                 nodule_contrasted = new_arr * c
 
